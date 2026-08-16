@@ -1,0 +1,869 @@
+/*
+ * OKUYAMA Leo Blog for Typora
+ *
+ * Based on the article typography and color tokens used by okuyamaleo.com.
+ * Copy this file to Typora's theme folder, restart Typora, and select
+ * "Okuyamaleo Blog" from the Themes menu.
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap");
+
+:root {
+  color-scheme: light;
+
+  /* Blog design tokens */
+  --background: #fdfdfd;
+  --foreground: #1a1a1c;
+  --muted-foreground: #6b7280;
+  --accent: #0f5cea;
+  --accent-soft: rgb(15 92 234 / 10%);
+  --muted: #e6e6e6;
+  --border: #d8d8db;
+  --surface-subtle: rgb(255 255 255 / 45%);
+  --surface: rgb(255 255 255 / 60%);
+  --surface-hover: rgb(255 255 255 / 85%);
+  --surface-border: rgb(255 255 255 / 60%);
+  --blockquote-background: #f7f7f7;
+  --code-background: #f5f5f6;
+  --code-foreground: #383a42;
+  --table-stripe: #f8f8f9;
+  --selection: rgb(15 92 234 / 28%);
+  --selection-foreground: #1a1a1c;
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 5%);
+  --shadow-float: 0 8px 24px rgb(0 0 0 / 8%);
+  --radius-card: 0.75rem;
+
+  --font-sans: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic",
+    "YuGothic", "Meiryo", sans-serif;
+  --font-display: "Jost", "Noto Sans JP", "Hiragino Kaku Gothic ProN",
+    "Yu Gothic", sans-serif;
+  --font-mono: "SFMono-Regular", "Cascadia Code", "Roboto Mono", Menlo,
+    Monaco, Consolas, "Liberation Mono", monospace;
+
+  /* Typora integration tokens */
+  --bg-color: var(--background);
+  --text-color: var(--foreground);
+  --control-text-color: var(--muted-foreground);
+  --side-bar-bg-color: #f7f7f8;
+  --active-file-bg-color: var(--accent-soft);
+  --active-file-text-color: var(--accent);
+  --item-hover-bg-color: #eef2f8;
+  --window-border: var(--border);
+  --rawblock-edit-panel-bd: var(--border);
+  --select-text-bg-color: var(--selection);
+  --select-text-font-color: var(--selection-foreground);
+  --monospace: var(--font-mono);
+
+  /* One Light-inspired tokens, matching the blog's Shiki light theme */
+  --syntax-comment: #a0a1a7;
+  --syntax-keyword: #a626a4;
+  --syntax-operator: #0184bc;
+  --syntax-string: #50a14f;
+  --syntax-number: #986801;
+  --syntax-function: #4078f2;
+  --syntax-variable: #e45649;
+  --syntax-tag: #e45649;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+
+    --background: #15171c;
+    --foreground: #e7e9ee;
+    --muted-foreground: #9aa0ad;
+    --accent: #5b9bff;
+    --accent-soft: rgb(91 155 255 / 14%);
+    --muted: #262a33;
+    --border: #2d323d;
+    --surface-subtle: rgb(38 42 51 / 35%);
+    --surface: rgb(38 42 51 / 50%);
+    --surface-hover: rgb(38 42 51 / 75%);
+    --surface-border: rgb(255 255 255 / 8%);
+    --blockquote-background: #1a1d23;
+    --code-background: #20242c;
+    --code-foreground: #eeffff;
+    --table-stripe: #1a1d23;
+    --selection: rgb(91 155 255 / 38%);
+    --selection-foreground: #ffffff;
+    --shadow-card: 0 1px 2px rgb(0 0 0 / 24%);
+    --shadow-float: 0 8px 24px rgb(0 0 0 / 28%);
+
+    --side-bar-bg-color: #111318;
+    --item-hover-bg-color: #20242c;
+
+    /* Material Theme Ocean-inspired tokens, matching the blog's dark Shiki theme */
+    --syntax-comment: #6c8096;
+    --syntax-keyword: #c792ea;
+    --syntax-operator: #89ddff;
+    --syntax-string: #c3e88d;
+    --syntax-number: #f78c6c;
+    --syntax-function: #82aaff;
+    --syntax-variable: #f07178;
+    --syntax-tag: #f07178;
+  }
+}
+
+html {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  line-height: 1.75;
+}
+
+::selection {
+  background-color: var(--selection);
+  color: var(--selection-foreground);
+}
+
+#write {
+  width: auto;
+  max-width: 56rem;
+  margin: 0 auto;
+  padding: 3rem 2rem 7.5rem;
+  overflow-wrap: break-word;
+}
+
+@media screen and (max-width: 640px) {
+  #write {
+    padding: 2rem 1rem 6rem;
+  }
+}
+
+/* ===== Article typography ===== */
+
+#write h1,
+#write h2,
+#write h3,
+#write h4,
+#write h5,
+#write h6 {
+  position: relative;
+  margin-block: 2em 0.75em;
+  color: var(--foreground);
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.4;
+  text-wrap: balance;
+  word-break: auto-phrase;
+}
+
+#write h1 {
+  margin-block-start: 0.75rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1rem;
+  font-size: 2rem;
+  line-height: 1.3;
+}
+
+#write h1::after {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 8rem;
+  height: 2px;
+  background-color: var(--accent);
+  content: "";
+}
+
+#write h2 {
+  font-size: 1.5rem;
+}
+
+#write h3 {
+  font-size: 1.25rem;
+}
+
+#write h4 {
+  font-size: 1rem;
+}
+
+#write h5 {
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+}
+
+#write h6 {
+  color: var(--muted-foreground);
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+}
+
+#write h1 code,
+#write h2 code,
+#write h3 code,
+#write h4 code,
+#write h5 code,
+#write h6 code {
+  font-size: 0.88em;
+}
+
+#write p,
+#write blockquote,
+#write ul,
+#write ol,
+#write dl,
+#write table,
+#write figure,
+#write .md-fences,
+#write .md-math-block {
+  margin-block: 1.25rem;
+}
+
+#write strong {
+  color: var(--foreground);
+  font-weight: 700;
+}
+
+#write a {
+  color: var(--foreground);
+  text-decoration-line: underline;
+  text-decoration-style: dashed;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+  overflow-wrap: anywhere;
+  transition: color 160ms ease;
+}
+
+#write a:hover,
+#write a:focus-visible {
+  color: var(--accent);
+}
+
+#write a:focus-visible,
+#write summary:focus-visible,
+#write .md-fences:focus-within {
+  border-radius: 0.2rem;
+  outline: 2px dashed var(--accent);
+  outline-offset: 2px;
+}
+
+#write ul,
+#write ol {
+  padding-inline-start: 1.625rem;
+}
+
+#write li {
+  margin-block: 0.375rem;
+}
+
+#write li::marker {
+  color: var(--accent);
+}
+
+#write li > ul,
+#write li > ol {
+  margin-block: 0.35rem;
+}
+
+#write hr {
+  height: 0;
+  margin-block: 2rem;
+  border: 0;
+  border-top: 1px solid var(--border);
+}
+
+#write img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-inline: auto;
+  border: 1px solid var(--border);
+}
+
+#write video,
+#write iframe {
+  max-width: 100%;
+  border-radius: var(--radius-card);
+}
+
+#write figcaption,
+#write .md-image > .md-meta {
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* ===== Quotes and GitHub-style alerts ===== */
+
+#write blockquote {
+  position: relative;
+  overflow: hidden;
+  margin-inline: 0;
+  border: 0;
+  border-inline-start: 3px solid var(--accent);
+  border-radius: var(--radius-card);
+  border-start-start-radius: 0;
+  border-end-start-radius: 0;
+  background-color: var(--blockquote-background);
+  padding: 1rem 1.25rem 1rem 3rem;
+  color: var(--foreground);
+  box-shadow: var(--shadow-card);
+  font-style: normal;
+  overflow-wrap: anywhere;
+}
+
+#write blockquote:not(.md-alert)::before {
+  position: absolute;
+  inset-block-start: 0.45rem;
+  inset-inline-start: 0.75rem;
+  color: var(--accent);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 2.5rem;
+  font-style: normal;
+  line-height: 1;
+  content: "\201C";
+  opacity: 0.3;
+}
+
+#write blockquote > :first-child {
+  margin-block-start: 0;
+}
+
+#write blockquote > :last-child {
+  margin-block-end: 0;
+}
+
+#write blockquote cite {
+  display: block;
+  margin-block-start: 1rem;
+  color: var(--muted-foreground);
+  font-size: 0.875em;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: end;
+}
+
+#write blockquote cite::before {
+  font-weight: 600;
+  content: "出典：";
+}
+
+#write .md-alert {
+  --alert-color: var(--accent);
+  border-inline-start-color: var(--alert-color);
+}
+
+#write .md-alert.md-alert-note {
+  --alert-color: #0ea5e9;
+}
+
+#write .md-alert.md-alert-tip {
+  --alert-color: #22c55e;
+}
+
+#write .md-alert.md-alert-warning {
+  --alert-color: #f59e0b;
+}
+
+#write .md-alert.md-alert-important,
+#write .md-alert.md-alert-caution {
+  --alert-color: #f43f5e;
+}
+
+#write .md-alert-text {
+  color: var(--foreground);
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+#write .md-alert-text svg {
+  fill: var(--alert-color);
+}
+
+@media (prefers-color-scheme: dark) {
+  #write .md-alert.md-alert-note {
+    --alert-color: #22d3ee;
+  }
+
+  #write .md-alert.md-alert-tip {
+    --alert-color: #4ade80;
+  }
+
+  #write .md-alert.md-alert-warning {
+    --alert-color: #fbbf24;
+  }
+
+  #write .md-alert.md-alert-important,
+  #write .md-alert.md-alert-caution {
+    --alert-color: #fb7185;
+  }
+}
+
+/* ===== Tables ===== */
+
+#write figure {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+#write table {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--foreground);
+  font-size: 0.95rem;
+}
+
+#write thead {
+  background-color: var(--surface);
+}
+
+#write tbody tr:nth-child(even) {
+  background-color: var(--table-stripe);
+}
+
+#write th,
+#write td {
+  border: 1px solid var(--border);
+  padding: 0.5rem;
+  text-align: start;
+  vertical-align: top;
+}
+
+#write th {
+  padding-block: 0.375rem;
+  color: var(--foreground);
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+#write table code {
+  overflow-wrap: anywhere;
+}
+
+/* ===== Inline code and code fences ===== */
+
+#write code,
+#write tt,
+#write kbd,
+#write samp,
+#write .md-fences,
+.CodeMirror {
+  font-family: var(--font-mono);
+}
+
+#write code,
+#write tt {
+  border: 0;
+  border-radius: 0.25rem;
+  background-color: var(--code-background);
+  padding: 0.16em 0.35em;
+  color: var(--foreground);
+  font-size: 0.875em;
+  overflow-wrap: anywhere;
+}
+
+#write .md-fences {
+  overflow: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background-color: var(--code-background);
+  padding: 1rem 1.25rem;
+  color: var(--code-foreground);
+  font-size: 0.875rem;
+  line-height: 1.7;
+  tab-size: 2;
+}
+
+#write .md-fences code {
+  background: transparent;
+  padding: 0;
+}
+
+.md-fences .code-tooltip,
+.md-fences .code-tooltip-content {
+  border-color: var(--border);
+  background-color: var(--code-background);
+  color: var(--muted-foreground);
+}
+
+.md-lang,
+.md-fences .code-tooltip .ty-input {
+  color: var(--muted-foreground);
+}
+
+.CodeMirror-gutters {
+  border-color: var(--border);
+  background-color: transparent;
+}
+
+.CodeMirror-linenumber {
+  color: var(--muted-foreground);
+  opacity: 0.65;
+}
+
+.cm-s-inner .cm-comment,
+.cm-s-inner .cm-quote {
+  color: var(--syntax-comment);
+  font-style: italic;
+}
+
+.cm-s-inner .cm-keyword,
+.cm-s-inner .cm-builtin {
+  color: var(--syntax-keyword);
+}
+
+.cm-s-inner .cm-operator,
+.cm-s-inner .cm-meta,
+.cm-s-inner .cm-qualifier {
+  color: var(--syntax-operator);
+}
+
+.cm-s-inner .cm-string,
+.cm-s-inner .cm-string-2,
+.cm-s-inner .cm-attribute {
+  color: var(--syntax-string);
+}
+
+.cm-s-inner .cm-number,
+.cm-s-inner .cm-atom {
+  color: var(--syntax-number);
+}
+
+.cm-s-inner .cm-def,
+.cm-s-inner .cm-property {
+  color: var(--syntax-function);
+}
+
+.cm-s-inner .cm-variable,
+.cm-s-inner .cm-variable-2,
+.cm-s-inner .cm-variable-3 {
+  color: var(--syntax-variable);
+}
+
+.cm-s-inner .cm-tag,
+.cm-s-inner .cm-bracket {
+  color: var(--syntax-tag);
+}
+
+.cm-s-inner .cm-error {
+  border-radius: 0.15rem;
+  background-color: #dc2626;
+  color: #ffffff;
+}
+
+.cm-s-inner .CodeMirror-selected,
+.cm-s-inner.CodeMirror-focused .CodeMirror-selected {
+  background-color: var(--selection);
+}
+
+.cm-s-inner .CodeMirror-matchingbracket {
+  color: var(--accent) !important;
+  text-decoration: underline;
+}
+
+#write kbd {
+  border: 1px solid var(--border);
+  border-bottom-width: 2px;
+  border-radius: 0.3rem;
+  background-color: var(--surface);
+  padding: 0.1em 0.45em;
+  box-shadow: var(--shadow-card);
+  color: var(--foreground);
+  font-size: 0.8em;
+  white-space: nowrap;
+}
+
+#write mark {
+  border-radius: 0.2rem;
+  background-color: rgb(250 204 21 / 35%);
+  padding-inline: 0.12em;
+  color: var(--foreground);
+}
+
+#write del {
+  color: var(--muted-foreground);
+}
+
+/* ===== Typora-specific article elements ===== */
+
+#write pre.md-meta-block {
+  min-height: 2rem;
+  margin-block: 0 2rem !important;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-card);
+  background-color: var(--surface);
+  padding: 1rem 1.25rem;
+  color: var(--muted-foreground);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  line-height: 1.6;
+}
+
+.md-meta,
+.md-before,
+.md-after,
+.md-tag,
+.md-comment {
+  color: var(--muted-foreground);
+}
+
+#write .md-toc {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background-color: var(--surface);
+  padding: 1rem 1.25rem;
+  box-shadow: var(--shadow-card);
+}
+
+#write .md-toc-content {
+  margin: 0;
+}
+
+#write .md-toc-item {
+  color: var(--foreground);
+}
+
+#write .md-toc-inner {
+  border-radius: 0.25rem;
+  padding-block: 0.15rem;
+  text-decoration: none;
+}
+
+#write .md-toc-inner:hover {
+  color: var(--accent);
+  text-decoration: underline dashed;
+  text-underline-offset: 0.25em;
+}
+
+#write sup.md-footnote {
+  border-radius: 0.25rem;
+  background-color: var(--accent-soft);
+  padding: 0.1em 0.35em;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+#write .footnotes-area {
+  margin-block-start: 3rem;
+  border-top: 1px dashed var(--border);
+  padding-block-start: 1rem;
+  color: var(--muted-foreground);
+}
+
+#write .footnote-line {
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+
+#write .md-task-list-item {
+  list-style: none;
+}
+
+#write .md-task-list-item > input {
+  width: 1rem;
+  height: 1rem;
+  margin-top: calc(0.875em - 8px);
+  border: 1px solid var(--border);
+  accent-color: var(--accent);
+}
+
+#write details {
+  color: var(--foreground);
+}
+
+#write summary {
+  cursor: pointer;
+  user-select: none;
+}
+
+#write .md-math-block,
+#write .md-diagram-panel {
+  overflow-x: auto;
+  border-radius: var(--radius-card);
+}
+
+#write .md-math-block:not(.md-focus),
+#write .md-diagram-panel {
+  background-color: var(--surface-subtle);
+}
+
+/* ===== Application chrome: outline, files, menus, and quick open ===== */
+
+#typora-sidebar {
+  border-inline-end: 1px solid var(--border);
+  background-color: var(--side-bar-bg-color);
+  color: var(--foreground);
+}
+
+.sidebar-tabs,
+.sidebar-footer,
+.outline-title-wrapper,
+.file-library-node,
+.file-list-item {
+  border-color: var(--border);
+}
+
+.outline-item,
+.file-node-content,
+.file-list-item {
+  border-radius: 0.4rem;
+}
+
+.outline-item:hover,
+.file-node-content:hover,
+.file-list-item:hover {
+  background-color: var(--item-hover-bg-color);
+}
+
+.outline-item-active > .outline-item,
+.file-library-node.active > .file-node-background,
+.file-list-item.active {
+  background-color: var(--active-file-bg-color);
+  color: var(--active-file-text-color);
+}
+
+.outline-item-active > .outline-item .outline-label,
+.file-list-item.active .file-list-item-file-name {
+  color: var(--active-file-text-color);
+  font-weight: 600;
+}
+
+.file-list-item-summary,
+.file-list-item-parent-loc,
+.file-list-item-time,
+.outline-label {
+  color: var(--muted-foreground);
+}
+
+.outline-item-active > .outline-item .outline-label {
+  color: var(--accent);
+}
+
+header,
+footer,
+.context-menu,
+.megamenu-menu,
+.megamenu-content,
+.modal-content,
+.dropdown-menu,
+.popover {
+  border-color: var(--border);
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+#top-titlebar,
+#top-titlebar * {
+  color: var(--muted-foreground);
+}
+
+.context-menu,
+.dropdown-menu,
+.popover,
+#typora-quick-open {
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-float);
+}
+
+.menu-item-container:hover,
+.dropdown-menu > li > a:hover,
+.megamenu-menu-list li a:hover,
+.megamenu-menu-list li a.active {
+  background-color: var(--item-hover-bg-color);
+  color: var(--foreground);
+}
+
+#typora-quick-open,
+#typora-quick-open-item {
+  border-color: var(--border);
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+#typora-quick-open-item.active,
+#typora-quick-open-item:hover {
+  background-color: var(--active-file-bg-color);
+}
+
+.form-control,
+.ty-input,
+input,
+textarea,
+select {
+  border-color: var(--border);
+  background-color: var(--surface);
+  color: var(--foreground);
+}
+
+.form-control:focus,
+.ty-input:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--accent);
+  outline-color: var(--accent);
+}
+
+.typora-sourceview-on #toggle-sourceview-btn,
+.ty-show-word-count #footer-word-count {
+  background-color: var(--accent-soft);
+  color: var(--accent);
+}
+
+/* ===== Export and accessibility ===== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media print {
+  :root {
+    color-scheme: light;
+    --background: #ffffff;
+    --foreground: #1a1a1c;
+    --muted-foreground: #6b7280;
+    --accent: #0f5cea;
+    --accent-soft: rgb(15 92 234 / 10%);
+    --muted: #e6e6e6;
+    --border: #d8d8db;
+    --surface-subtle: #ffffff;
+    --surface: #ffffff;
+    --surface-hover: #ffffff;
+    --surface-border: #d8d8db;
+    --blockquote-background: #f7f7f7;
+    --code-background: #f5f5f6;
+    --code-foreground: #383a42;
+    --table-stripe: #f8f8f9;
+    --shadow-card: none;
+    --shadow-float: none;
+  }
+
+  html,
+  body {
+    background-color: #ffffff;
+  }
+
+  #write {
+    max-width: none;
+    padding: 0;
+  }
+
+  #write a {
+    color: var(--foreground);
+  }
+
+  #write blockquote,
+  #write .md-toc,
+  #write .md-fences,
+  #write pre.md-meta-block {
+    break-inside: avoid;
+  }
+}
